@@ -18,4 +18,4 @@ true if label check has passed
 
 uses: actions/sample-github-action@v1.2
 with:
-hasOneOf: enhancement, bug
+hasOneOf: enhancement,bug
