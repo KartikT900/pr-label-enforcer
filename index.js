@@ -10,7 +10,7 @@ if (!githubContext.payload.pull_request) {
   return core.setOutput('passed', true);
 }
 
-const hasOneOfInput = core.getInput('hasOneOf');
+const hasOneOfInput = core.getInput('hasOneOf').split(',');
 
 const failMessages = [];
 
