@@ -1,15 +1,70 @@
-const core = require("@actions/core");
-const github = require("@actions/github");
+const core = require('@actions/core');
+const github = require('@actions/github');
 
-try {
-  // `who-to-greet` input defined in action metadata file
-  const nameToGreet = core.getInput("who-to-greet");
-  console.log(`Hello ${nameToGreet}!`);
-  const time = new Date().toTimeString();
-  core.setOutput("time", time);
-  // Get the JSON webhook payload for the event that triggered the workflow
-  const payload = JSON.stringify(github.context.payload, undefined, 2);
-  console.log(`The event payload: ${payload}`);
-} catch (error) {
-  core.setFailed(error.message);
+const gitToken = core.getInput('githubToken');
+const githubContext = github.context;
+const oktokit = github.getOctokit(gitToken);
+
+// In case the check is not running on a pull request
+if (githubContext.payload.pull_request) {
+  return core.setOutput('passed', true);
 }
+
+const hasOneOfInput = core.getInput('hasOneOf');
+
+const failMessages = [];
+
+const { labels: prLabels = [] } = githubContext.payload.pull_request;
+const hasOneOfCheck =
+  !hasOneOfInput || hasOneOfInput.some((label) => prLabels.includes(label));
+
+if (!hasOneOfCheck) {
+  failMessages.push(
+    `This PR needs to have one of the following labels to pass this check: ${hasOneOfInput.join(
+      ', '
+    )}`
+  );
+}
+
+async function runCheck() {
+  const checks = await oktokit.checks.listForRef({
+    ...githubContext.repo,
+    ref: githubContext.payload.pull_request.head.ref || 'noRef'
+  });
+
+  const checkIds = checks.data.check_runs
+    .filter((check) => check.name === githubContext.job)
+    .map((check) => check.id);
+
+  if (failMessages.length) {
+    for (const id of checkIds) {
+      await octokit.checks.update({
+        ...githubContext.repo,
+        check_run_id: id,
+        conclusion: 'failure',
+        output: {
+          title: 'Labels did not pass provided rules',
+          summary: failMessages.join('. ')
+        }
+      });
+    }
+
+    core.setFailed(failMessages.join('. '));
+  } else {
+    for (const id of checkIds) {
+      await octokit.checks.update({
+        ...context.repo,
+        check_run_id: id,
+        conclusion: 'success',
+        output: {
+          title: 'Labels follow all the provided rules',
+          summary: ''
+        }
+      });
+    }
+
+    core.setOutput('passed', true);
+  }
+}
+
+runCheck();

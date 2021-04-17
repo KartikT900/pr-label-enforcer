@@ -1,15 +1,17 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'Label PR'
+description: 'Label a PR'
 inputs:
-  who-to-greet:
-    description: 'who to greet'
+  hasOneOf:
+    description: 'Label that needs to be added to each PR'
     required: true
-    default: 'World'
 outputs:
-  time:
-    description: 'the time we greeted you'
+  passed:
+    description: 'Pull request has passed required label check'
 runs: 
   using: 'node12'
   main: 'index.js'
+branding:
+  color: purple
+  icon: anchor
 
 
