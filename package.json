@@ -1,0 +1,28 @@
+{
+  "name": "sample-github-action",
+  "version": "1.0.0",
+  "description": "A simple github action using JS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lunacy001/sample-github-action.git"
+  },
+  "keywords": [
+    "Javascript",
+    "Github",
+    "actions"
+  ],
+  "author": "Kartik",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Lunacy001/sample-github-action/issues"
+  },
+  "homepage": "https://github.com/Lunacy001/sample-github-action#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.7",
+    "@actions/github": "^4.0.0"
+  }
+}
