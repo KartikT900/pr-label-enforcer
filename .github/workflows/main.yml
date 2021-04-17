@@ -9,7 +9,7 @@ jobs:
     steps:
     - name: Check for PR label
       id: checkPRLabel
-      uses: actions/hello-world-javascript-action@v1.1
+      uses: actions/hello-world-javascript-action@v1.2
       with:
         hasOneOf: production ready, production blocked
         githubToken: ${{ secrets.GITHUB_TOKEN }}
