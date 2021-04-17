@@ -7,13 +7,14 @@ jobs:
     runs-on: ubuntu-latest
     name: Workflow to block PR merge if the said PR is not labeled
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout
+      id: checkout
+      uses: actions/checkout@v2
       with:
         ref: main
-    - name: Checkout
-    - uses: ./
-    - id: checkPRLabel
     - name: Check PR label
+      id: checkPRLabel
+      uses: ./
       with:
         hasOneOf: production ready, production blocked
         githubToken: ${{ secrets.GITHUB_TOKEN }}
