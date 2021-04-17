@@ -7,9 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     name: A job block PR merge if the said PR is not labeled
     steps:
+    - uses: actions/checkout@v1
     - name: Check for PR label
       id: checkPRLabel
-      uses: actions/sample-github-action@v1.2
+      uses: ./action.yml
       with:
         hasOneOf: production ready, production blocked
         githubToken: ${{ secrets.GITHUB_TOKEN }}
