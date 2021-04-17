@@ -15,8 +15,13 @@ const hasOneOfInput = core.getInput('hasOneOf');
 const failMessages = [];
 
 const { labels: prLabels = [] } = githubContext.payload.pull_request;
+
+console.log(prLabels, hasOneOfInput);
+
 const hasOneOfCheck =
   !hasOneOfInput || hasOneOfInput.some((label) => prLabels.includes(label));
+
+console.log({ hasOneOfCheck });
 
 if (!hasOneOfCheck) {
   failMessages.push(
