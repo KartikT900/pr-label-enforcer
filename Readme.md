@@ -1,21 +1,21 @@
 # Hello world javascript action
 
-This action prints "Hello World" or "Hello" + the name of a person to greet to the log.
+This action checks for a PR to have labels specified in `hasOneOf` and blocks merging of the PR, if respective label(s) are not available.
 
 ## Inputs
 
-### `who-to-greet`
+### `hasOneOf`
 
-**Required** The name of the person to greet. Default `"World"`.
+**Required** The labels that will be checked against each PR
 
 ## Outputs
 
-### `time`
+### `passed`
 
-The time we greeted you.
+true if label check has passed
 
 ## Example usage
 
-uses: actions/hello-world-javascript-action@v1.1
+uses: actions/sample-github-action@v1.2
 with:
-who-to-greet: 'Mona the Octocat'
+hasOneOf: enhancement, bug
