@@ -1,4 +1,4 @@
-# Hello world javascript action
+# PR Label Checker
 
 This action checks for a PR to have labels specified in `hasOneOf` and blocks merging of the PR, if respective label(s) are not available.
 
