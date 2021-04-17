@@ -6,7 +6,7 @@ const githubContext = github.context;
 const oktokit = github.getOctokit(gitToken);
 
 // In case the check is not running on a pull request
-if (githubContext.payload.pull_request) {
+if (!githubContext.payload.pull_request) {
   return core.setOutput('passed', true);
 }
 
