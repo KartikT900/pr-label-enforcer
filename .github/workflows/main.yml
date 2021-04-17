@@ -5,12 +5,15 @@ jobs:
   do-not-merge-check:
     if: github.base_ref == 'master' || github.base_ref == 'main'
     runs-on: ubuntu-latest
-    name: A job block PR merge if the said PR is not labeled
+    name: Workflow to block PR merge if the said PR is not labeled
     steps:
-    - uses: actions/checkout@v1
-    - name: Check for PR label
-      id: checkPRLabel
-      uses: ./action.yml
+    - uses: actions/checkout@v2
+      with:
+        ref: main
+    - name: Checkout
+    - uses: ./
+    - id: checkPRLabel
+    - name: Check PR label
       with:
         hasOneOf: production ready, production blocked
         githubToken: ${{ secrets.GITHUB_TOKEN }}
