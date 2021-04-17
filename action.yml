@@ -3,6 +3,9 @@ description: 'Label a PR'
 inputs:
   hasOneOf:
     description: 'Label that needs to be added to each PR'
+    required: false
+  githubToken:
+    description: 'The Github access token for PR API'
     required: true
 outputs:
   passed:
