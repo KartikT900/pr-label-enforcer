@@ -16,6 +16,6 @@ true if label check has passed
 
 ## Example usage
 
-uses: actions/sample-github-action@v1.2
+uses: actions/sample-github-action@v1.6
 with:
 hasOneOf: enhancement,bug,help

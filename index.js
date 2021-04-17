@@ -16,12 +16,10 @@ const failMessages = [];
 
 const { labels: prLabels = [] } = githubContext.payload.pull_request;
 
-console.log(prLabels, hasOneOfInput);
+const prlabelNames = prLabels.map((prLabel) => prLabel.name);
 
 const hasOneOfCheck =
-  !hasOneOfInput || hasOneOfInput.some((label) => prLabels.includes(label));
-
-console.log({ hasOneOfCheck });
+  !hasOneOfInput || hasOneOfInput.some((label) => prlabelNames.includes(label));
 
 if (!hasOneOfCheck) {
   failMessages.push(
