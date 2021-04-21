@@ -16,5 +16,5 @@ jobs:
       id: checkPRLabel
       uses: ./
       with:
-        hasOneOf: production ready,production blocked
+        hasLabel: production ready,production blocked
         githubToken: ${{ secrets.GITHUB_TOKEN }}
