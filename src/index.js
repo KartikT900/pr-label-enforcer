@@ -30,6 +30,7 @@ if (!hasLabelCheck) {
 }
 
 async function runCheck() {
+// Gets all the status checks running on a PR
   const statusChecks = await oktokit.checks.listForRef({
     ...githubContext.repo,
     ref: githubContext.payload.pull_request.head.ref || 'noRef'
