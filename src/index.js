@@ -1,8 +1,7 @@
 const githubCore = require('./helpers/core');
-const { github, githubContext } = require('./helpers/git-client');
+const { githubContext } = require('./helpers/git-client');
 
 const token = githubCore.getInput('githubToken');
-const githubContext = github.context;
 const oktokit = require('./helpers/oktokit')(token);
 
 // In case the check is not running on a pull request
