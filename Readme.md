@@ -1,4 +1,4 @@
-# PR Label Checker
+# PR Label Validator
 
 This action checks for a PR to have labels specified in `hasLabel` and blocks merging of the PR, if respective label(s) are not applied.
 
