@@ -1,10 +1,10 @@
 # PR Label Checker
 
-This action checks for a PR to have labels specified in `hasOneOf` and blocks merging of the PR, if respective label(s) are not available.
+This action checks for a PR to have labels specified in `hasLabel` and blocks merging of the PR, if respective label(s) are not applied.
 
 ## Inputs
 
-### `hasOneOf`
+### `hasLabel`
 
 **Required** The labels that will be checked against each PR
 
@@ -16,6 +16,8 @@ true if label check has passed
 
 ## Example usage
 
-uses: actions/sample-github-action@v1.6
+uses: actions/sample-github-action@v1.10
 with:
-hasOneOf: enhancement,bug,help
+hasLabel: enhancement,bug,help
+
+Will check and block PR if either of three labels are not applied to the PR.
