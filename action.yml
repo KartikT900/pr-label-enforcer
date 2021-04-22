@@ -1,7 +1,7 @@
 name: 'Label PR'
 description: 'Label a PR'
 inputs:
-  hasOneOf:
+  hasLabel:
     description: 'Label that needs to be added to each PR'
     required: false
   githubToken:

@@ -40,7 +40,7 @@ async function runCheck() {
 
   if (errorMessages.length) {
     statusCheckIds.forEach((checkId) => {
-        await oktokit.checks.update({
+        async (await oktokit.checks.update({
             ...githubContext.repo,
             check_run_id: checkId,
             conclusion: 'failure',
@@ -48,14 +48,14 @@ async function runCheck() {
               title: 'Labels did not pass outlined rules',
               summary: errorMessages.join('. ')
             }
-          });
+          }));
     });
 
     githubCore.setFailed(errorMessages.join('. '));
 
   } else {
     statusCheckIds.forEach(checkId => {
-        await oktokit.checks.update({
+        async (await oktokit.checks.update({
             ...context.repo,
             check_run_id: checkId,
             conclusion: 'success',
@@ -63,7 +63,7 @@ async function runCheck() {
               title: 'Labels follow all the outlined rules',
               summary: ''
             }
-          });
+          }));
     });
       
     githubCore.setOutput('passed', true);
