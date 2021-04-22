@@ -28,7 +28,7 @@ if (!hasLabelCheck) {
 }
 
 async function runCheck() {
-// Gets all the status checks running on a PR
+  // Gets all the status checks running on a PR
   const statusChecks = await oktokit.checks.listForRef({
     ...githubContext.repo,
     ref: githubContext.payload.pull_request.head.ref || 'noRef'
@@ -39,33 +39,32 @@ async function runCheck() {
     .map((check) => check.id);
 
   if (errorMessages.length) {
-    statusCheckIds.forEach((checkId) => {
-        async (await oktokit.checks.update({
-            ...githubContext.repo,
-            check_run_id: checkId,
-            conclusion: 'failure',
-            output: {
-              title: 'Labels did not pass outlined rules',
-              summary: errorMessages.join('. ')
-            }
-          }));
-    });
+    for (const id of statusCheckIds) {
+      await oktokit.checks.update({
+        ...githubContext.repo,
+        check_run_id: id,
+        conclusion: 'failure',
+        output: {
+          title: 'Labels did not pass outlined rule',
+          summary: errorMessages.join('. ')
+        }
+      });
+    }
 
     githubCore.setFailed(errorMessages.join('. '));
-
   } else {
-    statusCheckIds.forEach(checkId => {
-        async (await oktokit.checks.update({
-            ...context.repo,
-            check_run_id: checkId,
-            conclusion: 'success',
-            output: {
-              title: 'Labels follow all the outlined rules',
-              summary: ''
-            }
-          }));
-    });
-      
+    for (const id of statusCheckIds) {
+      await oktokit.checks.update({
+        ...context.repo,
+        check_run_id: id,
+        conclusion: 'success',
+        output: {
+          title: 'Labels follow all the outlined rule',
+          summary: ''
+        }
+      });
+    }
+
     githubCore.setOutput('passed', true);
   }
 }
