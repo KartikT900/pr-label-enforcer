@@ -45,7 +45,7 @@ async function runCheck() {
             check_run_id: checkId,
             conclusion: 'failure',
             output: {
-              title: 'Labels did not pass outlined rules',
+              title: 'Labels did not pass outlined rule',
               summary: errorMessages.join('. ')
             }
           }));
@@ -60,7 +60,7 @@ async function runCheck() {
             check_run_id: checkId,
             conclusion: 'success',
             output: {
-              title: 'Labels follow all the outlined rules',
+              title: 'Labels follow all the outlined rule',
               summary: ''
             }
           }));
