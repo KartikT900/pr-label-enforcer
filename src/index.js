@@ -14,7 +14,6 @@ const hasLabelInput = githubCore.getInput('hasLabel').split(',');
 const errorMessages = [];
 
 const { labels: prLabels = [] } = githubContext.payload.pull_request;
-
 const prlabelNames = prLabels.map((prLabel) => prLabel.name);
 
 const hasLabelCheck =
