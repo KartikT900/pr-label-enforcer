@@ -41,7 +41,7 @@ async function runCheck() {
 
   if (errorMessages.length) {
     statusCheckIds.forEach((checkId) => {
-        await octokit.checks.update({
+        await oktokit.checks.update({
             ...githubContext.repo,
             check_run_id: checkId,
             conclusion: 'failure',
@@ -56,7 +56,7 @@ async function runCheck() {
 
   } else {
     statusCheckIds.forEach(checkId => {
-        await octokit.checks.update({
+        await oktokit.checks.update({
             ...context.repo,
             check_run_id: checkId,
             conclusion: 'success',
